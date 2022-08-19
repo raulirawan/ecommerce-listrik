@@ -91,7 +91,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>TOKO</b>LISTRIK</a>
+    {{-- <a href="#"><b>TOKO</b>LISTRIK</a> --}}
+    <img src="{{ asset('assets/logo-listrik.png') }}" style="width: 200px">
   </div>
   <!-- /.login-logo -->
   <div class="card">

@@ -118,7 +118,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-danger"><i class="fa fa-shopping-cart"></i> Tambah Keranjang</button>
+                            <button class="btn btn-danger"><i class="fa fa-shopping-cart"></i>
+                                @if ($produk->is_pre_order == 1)
+                                Pre Order
+                                @else
+                                    Tambah Keranjang
+                                @endif
+                            </button>
                         </form>
 
                         {{-- <ul class="product-btns">

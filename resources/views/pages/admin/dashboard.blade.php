@@ -119,13 +119,13 @@
                                                 <td>{{ $item->user->name }}</td>
                                                 <td>Rp{{ number_format($item->transaksi->total_harga) }}</td>
                                                 <td>
-                                                    @if ($item->transaksi->status == 'PENDING')
+                                                    @if ($item->status == 'PENDING')
                                                         <span class="text-white badge badge-warning">PENDING</span>
-                                                    @elseif ($item->transaksi->status == 'SUDAH BAYAR')
+                                                    @elseif ($item->status == 'SUDAH BAYAR')
                                                         <span class="text-white badge badge-success">SUDAH BAYAR</span>
-                                                    @elseif ($item->transaksi->status == 'SEDANG DIKIRIM')
+                                                    @elseif ($item->status == 'SEDANG DIKIRIM')
                                                         <span class="text-white badge badge-warning">SEDANG DIKIRIM</span>
-                                                    @elseif ($item->transaksi->status == 'SELESAI')
+                                                    @elseif ($item->status == 'SELESAI')
                                                         <span class="text-white badge badge-success">SELESAI</span>
                                                     @else
                                                         <span class="text-white badge badge-danger">BATAL</span>

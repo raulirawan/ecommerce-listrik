@@ -64,7 +64,7 @@ class TransaksiController extends Controller
                     if ($item->status == 'PENDING') {
                         return '<span class="badge bg-warning">PENDING</span>';
                     } elseif ($item->status == 'SUDAH BAYAR') {
-                        return '<span class="badge bg-danger">SUDAH BAYAR</span>';
+                        return '<span class="badge bg-success">SUDAH BAYAR</span>';
                     } elseif ($item->status == 'SEDANG DIKIRIM') {
                         return '<span class="badge bg-warning">SEDANG DIKIRIM</span>';
                     } elseif ($item->status == 'SELESAI') {

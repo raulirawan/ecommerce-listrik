@@ -51,9 +51,9 @@
             <div class="row">
                 <!-- LOGO -->
                 <div class="col-md-3">
-                    <div class="header-logo">
+                    <div class="header-logo" style="background: white">
                         <a href="{{ url('/') }}" class="logo">
-                            <img src="https://logo.clearbit.com/spotify.com" alt="" style="max-width: 100px">
+                            <img src="{{ asset('assets/logo-listrik.png') }}" alt="" style="max-width: 100px">
                         </a>
                     </div>
                 </div>
