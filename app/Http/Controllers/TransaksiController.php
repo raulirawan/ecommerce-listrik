@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TransaksiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->transaction_status == 'settlement') {
+            alert()->success('success', 'Transaksi Berhasil, Kode Transaksi ' . $request->order_id);
+        }
         return view('pages.transaksi');
     }
 

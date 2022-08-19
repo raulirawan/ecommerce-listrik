@@ -260,7 +260,6 @@
             var ongkir = parseInt($("#ongkir").val());
             var sub_total = parseInt($("#sub_total").val());
             var total_harga = ongkir + sub_total;
-            alert(total_harga);
             $('#total-col').css('display', 'inline-table');
             $('#total').text('Rp' + numberWithCommas(total_harga));
         });

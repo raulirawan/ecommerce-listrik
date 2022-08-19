@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Toko Melati')
+@section('title', 'Toko listrik')
 @section('content')
     <style>
         .badge {
@@ -388,6 +388,7 @@
                                 <th>Nama Produk</th>
                                 <th>Quantity</th>
                                 <th>Harga</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody id="data-detail"></tbody>
@@ -417,7 +418,8 @@
                             <tr>
                                 <td>${val.produk.nama_produk}</td>
                                 <td>${val.qty}</td>
-                                <td>Rp${numberWithCommas(val.harga)}</td>
+                                <td>${numberWithCommas(val.harga)}</td>
+                                <td>Rp${numberWithCommas(val.harga * val.qty)}</td>
                             </tr>
                         `;
                     })

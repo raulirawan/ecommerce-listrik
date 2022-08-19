@@ -52,7 +52,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="{{ url('/') }}" class="logo">
                             <img src="https://logo.clearbit.com/spotify.com" alt="" style="max-width: 100px">
                         </a>
                     </div>

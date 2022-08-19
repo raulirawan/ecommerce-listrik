@@ -8,7 +8,7 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">  
+          <div class="col-sm-6">
             <h1>Rincian Order</h1>
           </div>
           <div class="col-sm-6">
@@ -40,7 +40,7 @@
                 <div class="row">
                   <div class="col-12">
                     <h4>
-                      <i class="fas fa-globe"></i> TOKO MELATI | {{ $transaction->status_transaksi }}
+                      <i class="fas fa-globe"></i> TOKO LISTRIK | {{ $transaction->status_transaksi }}
                       <small class="float-right">Date: {{ $transaction->created_at->format('d-m-Y') }}</small>
                     </h4>
                   </div>
@@ -52,7 +52,7 @@
                   <div class="col-sm-6 invoice-col">
                     From
                     <address>
-                      <strong>Toko Melati</strong><br>
+                      <strong>Toko listrik</strong><br>
                       Jalan Daan Mogot No.45,<br>
                       RT.9/RW.7, Semanan, Kec. Kalideres,  Jakarta Barat<br>
                       No Hp: 081298148785<br>
@@ -70,11 +70,11 @@
                     </address>
                   </div>
                   <!-- /.col -->
-                  
+
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
-  
+
                 <!-- Table row -->
                 <div class="row">
                   <div class="col-12 table-responsive">
@@ -102,14 +102,14 @@
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
-  
+
                 <div class="row">
                   <!-- accepted payments column -->
-                  
+
                   <!-- /.col -->
                   <div class="col-12">
                     <p class="lead">Total</p>
-  
+
                     <div class="table-responsive">
                       <table class="table">
                         <tr>
@@ -125,8 +125,8 @@
                           <td>Rp.{{ number_format($total) }}</td>
                         </tr>
                       </table>
-                      
-                      
+
+
                       <form method="POST" action="{{ route('upload.bukti', $transaction->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -135,9 +135,9 @@
                           <input type="file" class="form-control @error('bukti_transfer') is-invalid @enderror" name="bukti_transfer">
                           <div class="invalid-feedback">
                               Masukan Bukti Transfer
-                          </div>  
+                          </div>
                         </div>
-                    
+
                           <button type="submit" class="btn btn-primary mr-3" style="float: left">Simpan</button>
                           <a href="{{ route('transaksi.user.index') }}" class="btn btn-danger">Kembali</a>
                       </form>
@@ -154,7 +154,7 @@
                   </div>
                   <!-- /.col -->
                 </div>
-               
+
               </div>
 
               @if ($transaction->bukti_transfer != null)
@@ -169,8 +169,8 @@
                   </div>
                   <!-- /.col -->
                 </div>
-    
-                
+
+
               </div>
               @else
               <div class=""></div>

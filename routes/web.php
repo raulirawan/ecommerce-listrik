@@ -87,4 +87,4 @@ Route::prefix('produsen')
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/midtrans/callback', 'MidtransController@callback')->name('midtrans.callback');

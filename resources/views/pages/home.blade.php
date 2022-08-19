@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Toko Melati')
+@section('title','Toko listrik')
 @section('content')
 
 {{-- <!-- SECTION -->
@@ -69,7 +69,7 @@
                 @foreach ($categories as $category)
                     <li><a href="{{ route('category.slug', $category->slug) }}">{{ $category->nama }}</a></li>
                 @endforeach
-               
+
             </ul>
             <!-- /NAV -->
         </div>
@@ -98,7 +98,7 @@
                 @endif
                 <div class="section-title">
                     <h3 class="title">Produk Terbaru</h3>
-                    
+
                 </div>
             </div>
             <!-- /section title -->
@@ -124,7 +124,7 @@
                                             <p class="product-category">{{ $item->category->nama }}</p>
                                             <h3 class="product-name"><a href="#">{{ $item->nama }}</a></h3>
                                             <h4 class="product-price">Rp.{{ number_format($item->harga) }}</h4>
-                                        
+
                                             <div class="product-btns">
                                                 <button class="" onclick="window.open('{{ $item->shopee }}','_blank')" type="button"><i class="fa shopee"></i><span class="tooltipp">Link Shopee</span>
                                                 </button>
@@ -145,12 +145,12 @@
                                         </div>
                                     </div>
                                 @empty
-                                    
+
                                 @endforelse
                                 <!-- /product -->
 
                                 <!-- product -->
-                               
+
                             </div>
                             <div id="slick-nav-1" class="products-slick-nav"></div>
                         </div>
