@@ -30,7 +30,7 @@
                with font-awesome or any other icon font library -->
                 @if (Auth::user()->roles == 'SUPPLIER')
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('dashboard.admin') }}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Dashboard

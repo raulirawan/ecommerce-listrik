@@ -1,6 +1,6 @@
 <footer id="footer">
     <!-- top footer -->
-    <div class="section">
+    {{-- <div class="section">
         <!-- container -->
         <div class="container">
             <!-- row -->
@@ -61,7 +61,7 @@
             <!-- /row -->
         </div>
         <!-- /container -->
-    </div>
+    </div> --}}
     <!-- /top footer -->
 
     <!-- bottom footer -->
@@ -70,10 +70,10 @@
             <!-- row -->
             <div class="row">
                 <div class="col-md-12 text-center">
-                   
+
                     <span class="copyright">
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Toko Melati</a>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Toko Listrik</a>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </span>
                 </div>

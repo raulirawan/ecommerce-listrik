@@ -72,7 +72,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive">
-                                <a href="{{ route('produk.create') }}" class="btn btn-primary mb-2">(+) Order Barang</a>
+                                <a href="{{ route('order.form') }}" class="btn btn-primary mb-2">(+) Order Barang</a>
 
                                 <table id="table-data" class="table table-bordered table-striped">
                                     <thead>
@@ -81,6 +81,7 @@
                                             <th>Kode Transaksi</th>
                                             <th>No Resi</th>
                                             <th>Status</th>
+                                            <th>Bukti Transfer</th>
                                             <th>Total Harga</th>
                                             <th style="width: 15%">Aksi</th>
                                         </tr>
@@ -91,7 +92,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4">Total</th>
+                                            <th colspan="5">Total</th>
                                             <th id="total"></th>
                                         </tr>
                                     </tfoot>
@@ -110,6 +111,33 @@
         </section>
         <!-- /.content -->
     </div>
+    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload Bukti Transfer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="post" id="form-edit" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label>Bukti Transfer</label>
+                            <input type="file" name="bukti_transfer" id="bukti_transfer" class="form-control" required>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 @endsection
 @push('down-style')
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
@@ -123,9 +151,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="/vendor/datatables/buttons.server-side.js"></script>
     {{-- {!! $dataTable->scripts() !!} --}}
-
     <script>
         $(document).ready(function() {
+            $(document).on('click', '#edit', function() {
+                var id = $(this).data('id');
+                $('#form-edit').attr('action', '/admin/order-form/upload/bukti-transfer/' + id);
+            });
+
             function numberWithCommas(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
@@ -178,6 +210,9 @@
                             footer: true,
                         }
                     ],
+                    order: [
+                        [0, 'desc']
+                    ],
                     columns: [{
                             data: 'created_at',
                             name: 'created_at'
@@ -195,6 +230,10 @@
                             name: 'status'
                         },
                         {
+                            data: 'bukti_transfer',
+                            name: 'bukti_transfer'
+                        },
+                        {
                             data: 'total_harga',
                             name: 'total_harga',
                             render: $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
@@ -204,7 +243,7 @@
                             name: 'action',
                             orderable: false,
                             searcable: false,
-                            width: '10%',
+                            width: '20%',
                         }
                     ],
                     "footerCallback": function(row, data) {
@@ -217,25 +256,25 @@
                                 i : 0;
                         };
                         total = api
-                            .column(4)
+                            .column(5)
                             .data()
                             .reduce(function(a, b) {
                                 return intVal(a) + intVal(b);
                             }, 0);
                         // Total over this page
                         price = api
-                            .column(4, {
+                            .column(5, {
                                 page: 'current'
                             })
                             .data()
                             .reduce(function(a, b) {
                                 return intVal(a) + intVal(b);
                             }, 0);
-                        $(api.column(4).footer()).html(
+                        $(api.column(5).footer()).html(
                             'Rp' + price
                         );
                         var numFormat = $.fn.dataTable.render.number('\,', 'Rp').display;
-                        $(api.column(4).footer()).html(
+                        $(api.column(5).footer()).html(
                             'Rp ' + numFormat(price)
                         );
                     }

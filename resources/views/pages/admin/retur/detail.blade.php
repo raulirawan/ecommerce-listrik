@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active">Rincian Order</li>
+                            <li class="breadcrumb-item active">Rincian Order Return Barang</li>
                         </ol>
                     </div>
                 </div>
@@ -41,30 +41,30 @@
                                 <div class="col-12">
                                     <h4>
                                         <i class="fas fa-globe"></i> LISTRIK |
-                                        @if ($transaksi->status == 'PENDING')
+                                        @if ($retur->status == 'PENDING')
                                             <span class="text-white badge badge-warning">PENDING</span>
-                                        @elseif ($transaksi->status == 'SUDAH BAYAR')
+                                        @elseif ($retur->status == 'SUDAH BAYAR')
                                             <span class="text-white badge badge-success">SUDAH BAYAR</span>
-                                        @elseif ($transaksi->status == 'SEDANG DIKIRIM')
+                                        @elseif ($retur->status == 'SEDANG DIKIRIM')
                                             <span class="text-white badge badge-warning">SEDANG DIKIRIM</span>
-                                        @elseif ($transaksi->status == 'SELESAI')
+                                        @elseif ($retur->status == 'SELESAI')
                                             <span class="text-white badge badge-success">SELESAI</span>
                                         @else
                                             <span class="text-white badge badge-danger">BATAL</span>
                                         @endif
                                         <small class="float-right">Tanggal:
-                                            {{ $transaksi->created_at->format('d-m-Y') }}</small>
-                                        | NOMOR RESI : {{ $transaksi->no_resi ?? 'Belum Tersedia' }}
+                                            {{ $retur->transaksi->created_at->format('d-m-Y') }}</small>
+                                        | NOMOR RESI : {{ $retur->no_resi ?? 'Belum Tersedia' }}
                                     </h4>
                                 </div>
-                                {{-- <a href="https://api.whatsapp.com/send?phone={{ $transaksi->user->no_hp }}" target="_blank"
+                                {{-- <a href="https://api.whatsapp.com/send?phone={{ $retur->transaksi->user->no_hp }}" target="_blank"
                                     class="btn btn-success float-right d-inline-block">Hubungi Customer</a> --}}
 
                                 <!-- /.col -->
                             </div>
                             <!-- info row -->
-                            <div class="text-bold float-right">INVOICES #{{ $transaksi->kode_transaksi }}</div>
-                            @if ($transaksi->jenis_transaksi == 'KONSUMEN')
+                            <div class="text-bold float-right">INVOICES #{{ $retur->transaksi->kode_transaksi }}</div>
+                            @if ($retur->transaksi->jenis_transaksi == 'KONSUMEN')
                                 <div class="row invoice-info">
                                     <div class="col-sm-6 invoice-col">
                                         Pengirim
@@ -80,10 +80,10 @@
                                     <div class="col-sm-4 invoice-col">
                                         Penerima
                                         <address>
-                                            <strong>{{ $transaksi->user->name }}</strong><br>
-                                            {{ $transaksi->alamat }}<br>
-                                            No Hp: {{ $transaksi->user->no_hp }}<br>
-                                            Email: {{ $transaksi->user->email }}
+                                            <strong>{{ $retur->transaksi->user->name }}</strong><br>
+                                            {{ $retur->transaksi->alamat }}<br>
+                                            No Hp: {{ $retur->transaksi->user->no_hp }}<br>
+                                            Email: {{ $retur->transaksi->user->email }}
                                         </address>
                                     </div>
                                     <!-- /.col -->
@@ -134,7 +134,7 @@
                                         </thead>
                                         <tbody>
                                             @php
-                                                $transaksiDetail = App\TransaksiDetail::where('transaksi_id', $transaksi->id)->get();
+                                                $transaksiDetail = App\TransaksiDetail::where('transaksi_id', $retur->transaksi->id)->get();
                                             @endphp
                                             @foreach ($transaksiDetail as $item)
                                                 <tr>
@@ -159,20 +159,20 @@
 
                                     <div class="table-responsive">
                                         <table class="table">
-                                            @if ($transaksi->jenis_transaksi == 'KONSUMEN')
+                                            @if ($retur->transaksi->jenis_transaksi == 'KONSUMEN')
                                                 <tr>
                                                     <th style="width:50%">Subtotal:</th>
                                                     <td>Rp.{{ number_format($transaksiDetail->sum('harga')) }}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Pengiriman:</th>
-                                                    <td>Rp.{{ number_format($transaksi->ongkos_kirim) }}
-                                                        ({{ $transaksi->expedisi }})</td>
+                                                    <td>Rp.{{ number_format($retur->transaksi->ongkos_kirim) }}
+                                                        ({{ $retur->transaksi->expedisi }})</td>
                                                 </tr>
                                             @endif
                                             <tr>
                                                 <th>Total:</th>
-                                                <td>Rp.{{ number_format($transaksiDetail->sum('harga') + $transaksi->ongkos_kirim) }}
+                                                <td>Rp.{{ number_format($transaksiDetail->sum('harga') + $retur->transaksi->ongkos_kirim) }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -183,44 +183,27 @@
 
                                     </div>
                                 </div>
-                                @if ($transaksi->jenis_transaksi == 'KONSUMEN')
-                                    <div class="col-md-3">
-                                        <form method="POST"
-                                            action="{{ route('transaksi.admin.update.resi', $transaksi->id) }}"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">No Resi</label>
-                                                <input type="text" name="no_resi" class="form-control"
-                                                    placeholder="Masukan Nomor Resi" required>
+                                <div class="col-md-3">
+                                    <form method="POST"
+                                        action="{{ route('transaksi.update.resi.return', $retur->id) }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">No Resi</label>
+                                            <input type="text" name="no_resi" class="form-control"
+                                                placeholder="Masukan Nomor Resi" required>
 
-                                            </div>
+                                        </div>
 
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </form>
-                                    </div>
-                                @elseif(Auth::user()->roles == 'PRODUSEN')
-                                    <div class="col-md-3">
-                                        <form method="POST"
-                                            action="{{ route('transaksi.produsen.update.resi', $transaksi->id) }}"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">No Resi</label>
-                                                <input type="text" name="no_resi" class="form-control"
-                                                    placeholder="Masukan Nomor Resi" required>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </form>
+                                </div>
 
-                                            </div>
-
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </form>
-                                    </div>
-                                @endif
                                 <!-- /.col -->
                             </div>
 
                         </div>
-                        {{-- @if ($transaksi->bukti_transfer != null)
+                        {{-- @if ($retur->transaksi->bukti_transfer != null)
                             <div class="invoice p-3 mb-3">
                                 <!-- title row -->
                                 <div class="row">
@@ -228,7 +211,7 @@
                                         <h4>
                                             Bukti Transfer
                                         </h4>
-                                        <img src="{{ Storage::url($transaksi->bukti_transfer) }}" style="max-width: 300px"
+                                        <img src="{{ Storage::url($retur->transaksi->bukti_transfer) }}" style="max-width: 300px"
                                             alt="">
                                     </div>
                                     <!-- /.col -->

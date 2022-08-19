@@ -179,6 +179,9 @@
                             footer: true,
                         }
                     ],
+                    order: [
+                        [0, 'desc']
+                    ],
                     columns: [{
                             data: 'created_at',
                             name: 'created_at'

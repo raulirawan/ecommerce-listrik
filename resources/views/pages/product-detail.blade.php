@@ -1,37 +1,37 @@
 @extends('layouts.app')
 
-@section('title','Toko Melati')
+@section('title', 'Toko Melati')
 @section('content')
 
     <div class="row">
         <div class="col-12">
-         
+
         </div>
     </div>
-	<!-- BREADCRUMB -->
+    <!-- BREADCRUMB -->
     <div id="breadcrumb" class="section">
         <!-- container -->
         <div class="container">
             <div class="row">
                 <div class="col-md 12">
-                    @if(session()->has('sukses'))
-                    <div class="alert alert-success">
-                        {{ session()->get('sukses') }}
-                    </div>
+                    @if (session()->has('sukses'))
+                        <div class="alert alert-success">
+                            {{ session()->get('sukses') }}
+                        </div>
                     @endif
-                    @if(session()->has('error'))
-                    <div class="alert alert-danger">
-                        {{ session()->get('error') }}
-                    </div>
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{ session()->get('error') }}
+                        </div>
                     @endif
-                    @if($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -39,9 +39,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb-tree">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">{{ $product->category->nama }}</a></li>
-                        <li class="active">{{ $product->nama }}</li>
+                        <li><a href="{{ url('/') }}">Home</a></li>
+                        <li class="active">{{ $produk->slug }}</li>
                     </ul>
                 </div>
             </div>
@@ -60,10 +59,10 @@
                 <!-- Product main img -->
                 <div class="col-md-5 col-md-push-2">
                     <div id="product-main-img">
-                        @foreach ($product->galleries as $gallery)
-                        <div class="product-preview">
-                            <img src="{{ Storage::url($gallery->photos) }}" alt="">
-                        </div>
+                        @foreach (json_decode($produk->gambar) as $item)
+                            <div class="product-preview">
+                                <img src="{{ asset($item) }}" alt="">
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -72,14 +71,14 @@
                 <!-- Product thumb imgs -->
                 <div class="col-md-2  col-md-pull-5">
                     <div id="product-imgs">
-                        
-                        @foreach ($product->galleries as $gallery)
+
+                        @foreach (json_decode($produk->gambar) as $item)
                             <div class="product-preview">
-                                <img src="{{ Storage::url($gallery->photos) }}" alt="">
+                                <img src="{{ asset($item) }}" alt="">
                             </div>
                         @endforeach
 
-                        
+
                     </div>
                 </div>
                 <!-- /Product thumb imgs -->
@@ -87,7 +86,7 @@
                 <!-- Product details -->
                 <div class="col-md-5">
                     <div class="product-details">
-                        <h2 class="product-name">{{ $product->nama }}</h2>
+                        <h2 class="product-name">{{ $produk->nama_produk }}</h2>
                         {{-- <div>
                             <div class="product-rating">
                                 <i class="fa fa-star"></i>
@@ -99,41 +98,27 @@
                             <a class="review-link" href="#">10 Review(s) | Add your review</a>
                         </div> --}}
                         <div>
-                            <h3 class="product-price">Rp.{{ number_format($product->harga) }}</h3>
-                            <br/>
-                            <h6>Stok : {{ $product->stok }}</h6>
-                                {{-- <del class="product-old-price">$990.00</del></h3>
+                            <h3 class="product-price">Rp.{{ number_format($produk->harga) }}</h3>
+                            <br />
+                            <h6>Stok : {{ $produk->stok }}</h6>
+                            {{-- <del class="product-old-price">$990.00</del></h3>
                             <span class="product-available">In Stock</span> --}}
                         </div>
                         {{-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> --}}
                         <div class="dekripsi">
-                            {!! $product->deskripsi !!}
+                            {!! $produk->deskripsi !!}
                         </div>
-                        <form action="{{ route('add.to.cart', $product->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('add.cart', $produk->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="add-to-cart">
                                 <div class="qty-label">
                                     Qty
                                     <div class="input-number">
-                                        <input type="number" name="qty">
+                                        <input type="number" value="1" name="qty">
                                     </div>
                                 </div>
-                                @if ($product->ukuran_id != null)
-                                <div class="qty-label">
-                                    Ukuran
-                                    <div class="input-number">
-                                        <select name="ukuran" id="ukuran" class="form-control">
-                                            @for ($i=1; $i<=10; $i++)
-                                            <option value="{{ $product->ukuran->{"ukuran{$i}"} }}">{{ $product->ukuran->{"ukuran{$i}"} }}</option>
-                                            @endfor
-                                        </select>
-                                    </div>
-                                </div>
-                                @else
-                                <div class="div"></div>
-                                @endif
                             </div>
-                            <button class="btn btn-danger"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                            <button class="btn btn-danger"><i class="fa fa-shopping-cart"></i> Tambah Keranjang</button>
                         </form>
 
                         {{-- <ul class="product-btns">
@@ -165,7 +150,7 @@
                         <!-- product tab nav -->
                         <ul class="tab-nav">
                             <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-                            
+
                         </ul>
                         <!-- /product tab nav -->
 
@@ -181,7 +166,7 @@
                             </div>
                             <!-- /tab1  -->
 
-                         
+
                         </div>
                         <!-- /product tab content  -->
                     </div>

@@ -107,4 +107,6 @@ class TransaksiController extends Controller
             return redirect()->route('detail.transaksi.admin', $id)->with('error', ' Data Resi Gagal di Update!');
         }
     }
+
+
 }
