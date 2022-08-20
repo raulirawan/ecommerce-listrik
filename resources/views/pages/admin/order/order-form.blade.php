@@ -49,7 +49,7 @@
                                         <label for="exampleInputEmail1">Nama Produk</label>
                                         <select name="produk_id" id="produk_id" class="form-control" required>
                                             <option value="">Pilih Produk</option>
-                                            @foreach (App\Produk::where('is_pre_order', 1)->whereNotNull('harga_produsen')->get() as $item)
+                                            @foreach (App\Produk::whereNotNull('harga_produsen')->get() as $item)
                                                 <option value="{{ $item->id }}">{{ $item->nama_produk }}
                                                     (Rp{{ number_format($item->harga_produsen) ?? 'Belum Tersedia' }})
                                                 </option>
