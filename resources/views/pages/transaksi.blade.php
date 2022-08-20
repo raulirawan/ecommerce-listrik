@@ -418,8 +418,8 @@
                             <tr>
                                 <td>${val.produk.nama_produk}</td>
                                 <td>${val.qty}</td>
-                                <td>${numberWithCommas(val.harga)}</td>
-                                <td>Rp${numberWithCommas(val.harga * val.qty)}</td>
+                                <td>Rp${numberWithCommas(val.produk.harga)}</td>
+                                <td>Rp${numberWithCommas(val.harga)}</td>
                             </tr>
                         `;
                     })

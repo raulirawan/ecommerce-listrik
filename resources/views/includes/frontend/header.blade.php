@@ -16,7 +16,7 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i>+62 8321412413</a></li>
+                <li><a href="https://wa.me/62895321838995" target="_blank"><i class="fa fa-whatsapp"></i>+62 895-3218-38995</a></li>
                 <li><a href="#"><i class="fa fa-envelope-o"></i>tokolistrik@gmail.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i>Jl. Kemenangan No. 100</a></li>
             </ul>

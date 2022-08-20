@@ -156,7 +156,7 @@ class CartController extends Controller
                 $transaksiDetail = new TransaksiDetail();
                 $transaksiDetail->transaksi_id = $transaksi->id;
                 $transaksiDetail->produk_id = $cart->produk->id;
-                $transaksiDetail->harga = $cart->produk->harga;
+                $transaksiDetail->harga = $cart->produk->harga * $cart->qty;
                 $transaksiDetail->qty = $cart->qty;
                 $transaksiDetail->save();
             }

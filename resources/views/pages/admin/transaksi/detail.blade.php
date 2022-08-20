@@ -72,7 +72,7 @@
                                             <strong>Toko Listrik</strong><br>
                                             Jalan Kenangan No.100,<br>
                                             RT.01/RW.03, Kebon Sayur, Kec. Tanjung Duren, Jakarta Barat<br>
-                                            No Hp: 0824721342<br>
+                                            No Hp: +62 895-3218-38995<br>
                                             Email: tokolistrik@gmail.com
                                         </address>
                                     </div>
@@ -129,6 +129,7 @@
                                             <tr>
                                                 <th>Produk</th>
                                                 <th>Qty</th>
+                                                <th>Harga</th>
                                                 <th>Subtotal</th>
                                             </tr>
                                         </thead>
@@ -140,6 +141,7 @@
                                                 <tr>
                                                     <td>{{ $item->produk->nama_produk }}</td>
                                                     <td>{{ $item->qty }}</td>
+                                                    <td>Rp.{{ number_format($item->produk->harga) }}</td>
                                                     <td>Rp.{{ number_format($item->harga) }}</td>
                                                 </tr>
                                             @endforeach
