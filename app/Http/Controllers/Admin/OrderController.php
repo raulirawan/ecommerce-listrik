@@ -182,7 +182,7 @@ class OrderController extends Controller
                 $transaksiDetail = new TransaksiDetail();
                 $transaksiDetail->transaksi_id = $transaksi->id;
                 $transaksiDetail->produk_id = $item->produk->id;
-                $transaksiDetail->harga = $item->produk->harga_produsen;
+                $transaksiDetail->harga = $item->produk->harga_produsen * $item->qty;
                 $transaksiDetail->qty = $item->qty;
                 $transaksiDetail->save();
             }

@@ -110,7 +110,7 @@
                                             <strong>Toko Listrik</strong><br>
                                             Jalan Kenangan No.100,<br>
                                             RT.01/RW.03, Kebon Sayur, Kec. Tanjung Duren, Jakarta Barat<br>
-                                            No Hp: 0824721342<br>
+                                            No Hp: +62 895-3218-38995<br>
                                             Email: tokolistrik@gmail.com
                                         </address>
                                     </div>
@@ -122,34 +122,65 @@
                             <!-- /.row -->
 
                             <!-- Table row -->
-                            <div class="row">
-                                <div class="col-12 table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Produk</th>
-                                                <th>Qty</th>
-                                                <th>Harga</th>
-                                                <th>Subtotal</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @php
-                                                $transaksiDetail = App\TransaksiDetail::where('transaksi_id', $transaksi->id)->get();
-                                            @endphp
-                                            @foreach ($transaksiDetail as $item)
+                            @if ($transaksi->jenis_transaksi == 'KONSUMEN')
+                                <div class="row">
+                                    <div class="col-12 table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
                                                 <tr>
-                                                    <td>{{ $item->produk->nama_produk }}</td>
-                                                    <td>{{ $item->qty }}</td>
-                                                    <td>Rp.{{ number_format($item->produk->harga) }}</td>
-                                                    <td>Rp.{{ number_format($item->harga) }}</td>
+                                                    <th>Produk</th>
+                                                    <th>Qty</th>
+                                                    <th>Harga</th>
+                                                    <th>Subtotal</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                @php
+                                                    $transaksiDetail = App\TransaksiDetail::where('transaksi_id', $transaksi->id)->get();
+                                                @endphp
+                                                @foreach ($transaksiDetail as $item)
+                                                    <tr>
+                                                        <td>{{ $item->produk->nama_produk }}</td>
+                                                        <td>{{ $item->qty }}</td>
+                                                        <td>Rp.{{ number_format($item->produk->harga) }}</td>
+                                                        <td>Rp.{{ number_format($item->harga) }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.col -->
                                 </div>
-                                <!-- /.col -->
-                            </div>
+                            @else
+                                <div class="row">
+                                    <div class="col-12 table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Produk</th>
+                                                    <th>Qty</th>
+                                                    <th>Harga</th>
+                                                    <th>Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php
+                                                    $transaksiDetail = App\TransaksiDetail::where('transaksi_id', $transaksi->id)->get();
+                                                @endphp
+                                                @foreach ($transaksiDetail as $item)
+                                                    <tr>
+                                                        <td>{{ $item->produk->nama_produk }}</td>
+                                                        <td>{{ $item->qty }}</td>
+                                                        <td>Rp.{{ number_format($item->produk->harga_produsen) }}</td>
+                                                        <td>Rp.{{ number_format($item->harga) }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            @endif
                             <!-- /.row -->
 
                             <div class="row">

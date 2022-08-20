@@ -129,6 +129,7 @@
                                             <tr>
                                                 <th>Produk</th>
                                                 <th>Qty</th>
+                                                <th>Harga</th>
                                                 <th>Subtotal</th>
                                             </tr>
                                         </thead>
@@ -140,6 +141,7 @@
                                                 <tr>
                                                     <td>{{ $item->produk->nama_produk }}</td>
                                                     <td>{{ $item->qty }}</td>
+                                                    <td>Rp.{{ number_format($item->produk->harga) }}</td>
                                                     <td>Rp.{{ number_format($item->harga) }}</td>
                                                 </tr>
                                             @endforeach
