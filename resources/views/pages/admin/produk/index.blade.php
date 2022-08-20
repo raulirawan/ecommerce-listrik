@@ -65,7 +65,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->nama_produk }}</td>
                         <td>
-                            <img src="{{ asset(json_decode($item->gambar)[0]) }}" style="width: 100px">
+                            <img src="{{ asset(json_decode($item->gambar)[0] ?? 'assets/images/no-image.jpg') }}" style="width: 100px">
                         </td>
                         <td>Rp.{{ number_format($item->harga) }}</td>
                         <td>{{ $item->stok }}</td>

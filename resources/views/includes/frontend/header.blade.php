@@ -116,7 +116,7 @@
                                             @endphp
                                             <div class="product-widget">
                                                 <div class="product-img">
-                                                    <img src="{{ asset(json_decode($item->produk->gambar)[0]) }}"
+                                                    <img src="{{ asset(json_decode($item->produk->gambar)[0] ?? 'assets/images/no-image.jpg') }}"
                                                         alt="">
                                                 </div>
                                                 <div class="product-body">

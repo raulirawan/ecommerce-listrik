@@ -59,11 +59,18 @@
                 <!-- Product main img -->
                 <div class="col-md-5 col-md-push-2">
                     <div id="product-main-img">
-                        @foreach (json_decode($produk->gambar) as $item)
+                        @if (json_decode($produk->gambar))
+                            @foreach (json_decode($produk->gambar) as $item)
+                                <div class="product-preview">
+                                    <img src="{{ asset($item) }}" alt="">
+                                </div>
+                            @endforeach
+                        @else
                             <div class="product-preview">
-                                <img src="{{ asset($item) }}" alt="">
+                                <img src="{{ asset('assets/images/no-image.jpg') }}" alt="">
                             </div>
-                        @endforeach
+                        @endif
+
                     </div>
                 </div>
                 <!-- /Product main img -->
@@ -72,11 +79,17 @@
                 <div class="col-md-2  col-md-pull-5">
                     <div id="product-imgs">
 
-                        @foreach (json_decode($produk->gambar) as $item)
+                        @if (json_decode($produk->gambar))
+                            @foreach (json_decode($produk->gambar) as $item)
+                                <div class="product-preview">
+                                    <img src="{{ asset($item) }}" alt="">
+                                </div>
+                            @endforeach
+                        @else
                             <div class="product-preview">
-                                <img src="{{ asset($item) }}" alt="">
+                                <img src="{{ asset('assets/images/no-image.jpg') }}" alt="">
                             </div>
-                        @endforeach
+                        @endif
 
 
                     </div>
@@ -120,7 +133,7 @@
                             </div>
                             <button class="btn btn-danger"><i class="fa fa-shopping-cart"></i>
                                 @if ($produk->is_pre_order == 1)
-                                Pre Order
+                                    Pre Order
                                 @else
                                     Tambah Keranjang
                                 @endif
